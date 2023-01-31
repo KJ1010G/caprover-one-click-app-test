@@ -1,0 +1,33 @@
+captainVersion: 4
+services:
+  $$cap_appname:
+    image: kjkadocker/caprover-testing:captest
+    ports:
+      - $$cap_port:12345
+      # - 12345:12345
+    environment:
+      REPO_URL: '$$cap_repo_url'
+      REPO_BRANCH: '$$cap_repo_branch'
+    caproverExtra:
+      containerHttpPort: '$$cap_port'
+
+caproverOneClickApp:
+  variables:
+    - id: '$$cap_repo_url'
+      label: Github Repository URL
+    - id: '$$cap_repo_branch'
+      label: Repository Branch
+      defaultValue: 'main'
+    - id: '$$cap_port'
+      label: Port
+      validRegex: '/^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/'
+  instructions:
+    start: |-
+      Just returns an HTML containing the number of files in the root directory
+      of the github URL you enter.
+    end: |-
+      Go to website to check the count
+  displayName: Github repo root files count
+  isOfficial: false ## Only if all images used here are official or from a trusted source.
+  description: testing caprover
+  documentation: none
