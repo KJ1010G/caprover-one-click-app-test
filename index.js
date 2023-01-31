@@ -9,7 +9,7 @@ let branch = env.REPO_BRANCH;
 
 function getOwnerAndRepo(url) {
     // example URL = https://github.com/reactjs/reactjs.org
-    if ( ! url.startsWith("https://github.com/")) {
+    if ( ! /^https:\/\/github.com\/[a-zA-Z0-9_\-\.]+\/[a-zA-Z0-9_\-\.]+$/.test(url) ) {
         return false;
     }
     let path = url.slice(19);
@@ -53,6 +53,10 @@ function getRootFilesCount(data) {
 app.get('/', async (req, res) => {
     if (! parameters) {
         res.send(`Invalid Github URL was provided`);
+        return
+    }
+    if ( ! /(^main$)|(^master$)/.test(branch) ) {
+        res.send(`Only main or master branch supported`);
         return
     }
     let data = await getFiles(parameters[0], parameters[1], branch);

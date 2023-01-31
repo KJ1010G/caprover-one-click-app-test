@@ -15,9 +15,13 @@ caproverOneClickApp:
   variables:
     - id: '$$cap_repo_url'
       label: Github Repository URL
+      validRegex: '/^https:\/\/github.com\/[a-zA-Z0-9_\-\.]+\/[a-zA-Z0-9_\-\.]+$/'
+      description: 'Enter full https github url'
     - id: '$$cap_repo_branch'
       label: Repository Branch
       defaultValue: 'main'
+      validRegex: '/(^main$)|(^master$)/'
+      description: 'only main or master supported'
     - id: '$$cap_port'
       label: Port
       validRegex: '/^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/'
