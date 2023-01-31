@@ -9,7 +9,7 @@ services:
       REPO_URL: '$$cap_repo_url'
       REPO_BRANCH: '$$cap_repo_branch'
     caproverExtra:
-      containerHttpPort: '$$cap_port'
+      containerHttpPort: 12345
 
 caproverOneClickApp:
   variables:
